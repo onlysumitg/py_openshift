@@ -1,0 +1,34 @@
+#!/bin/bash -e
+
+# https://docs.openshift.com/container-platform/3.4/using_images/s2i_images/customizing_s2i_images.html
+
+# The assemble script builds the application artifacts from a source and
+# places them into appropriate directories inside the image.
+
+
+
+# https://www.javatpoint.com/linux-set-command#:~:text=Linux%20set%20command%20is%20used,tasks%20without%20facing%20any%20issue.
+set -ex
+
+echo "Checking if there is a need to lock dependencies..."
+
+echo ${STI_SCRIPTS_PATH}
+
+pushd /tmp/src
+
+[[ -f Pipfile && ! -f Pipfile.lock ]] && {
+  echo "Updating pip and installing Flask..."
+  # Enable pip3.
+  pip install --upgrade pip
+  # install flask
+  pipenv install
+}
+
+
+popd
+
+# Execute the default S2I script
+source ${STI_SCRIPTS_PATH}/assemble
+
+# You can write S2I scripts in any programming language, as long as the
+# scripts are executable inside the builder image.
