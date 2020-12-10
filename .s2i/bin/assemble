@@ -20,6 +20,9 @@ pushd /tmp/src
   echo "Updating pip and installing Flask..."
   # Enable pip3.
   pip install --upgrade pip
+
+  pip install pipenv
+
   # install flask
   pipenv install
 #}
