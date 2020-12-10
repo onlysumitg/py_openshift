@@ -12,17 +12,17 @@ set -ex
 
 echo "Checking if there is a need to lock dependencies..."
 
-echo ${STI_SCRIPTS_PATH}
+echo ${STI_SCRIPTS_PATH}  #/usr/libexec/s2i
 
 pushd /tmp/src
 
-[[ -f Pipfile && ! -f Pipfile.lock ]] && {
+#[[ -f Pipfile && ! -f Pipfile.lock ]] && {
   echo "Updating pip and installing Flask..."
   # Enable pip3.
   pip install --upgrade pip
   # install flask
   pipenv install
-}
+#}
 
 
 popd
