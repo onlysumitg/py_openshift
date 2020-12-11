@@ -17,13 +17,14 @@ echo ${STI_SCRIPTS_PATH}  #/usr/libexec/s2i
 pushd /tmp/src
 
 #[[ -f Pipfile && ! -f Pipfile.lock ]] && {
-  echo "Updating pip and installing Flask..."
+  echo "Updating pip "
   # Enable pip3.
   pip install --upgrade pip
 
+  # install pipenv
   pip install pipenv
 
-  # install flask
+  # install dependencies from pipfile
   pipenv install
 #}
 
